@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Letters Table</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <style>
+      .link{
+        display: flex;
+      }
+      .btn-1{
+        margin-right: 2px;
+      }
+      .btn{
+        width: 50vw;
+        border-radius: 0 !important;
+      }
+
+      .btn-sum{
+        margin-top: 10px;
+      }
+
+      .card{
+        width: 75vw;
+        text-align: center;
+        height: auto;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 8px 16px 2px #e2e2e2;
+      }
+
+      .container{
+        width: 100vw;
+        height: 90vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #displaySum{
+        display: block;
+        margin-top: 30px;
+        font-size: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="link">
+      <a class="btn btn-1 btn-success" href="./lettersTable.html">Letters Table</a>
+      <a class="btn btn-primary" href="/">Home</a>
+    </div>
+
+    <div class="container">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Sum Letters</h5>
+          <form onsubmit="sumLetters(); return false;">
+            <input id="name" type="text" placeholder="Enter Name" class="form-control">
+            <button type="submit" class="btn btn-sum btn-primary">Sum</button>
+          </form>
+          <span id="displaySum"></span>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      const sumLetters = () => {
+        const nameElement = document.getElementById("name");
+        const displaySumElement = document.getElementById("displaySum");
+        const alphabets = {};
+
+        const alpha = "abcdefghijklmnopqrstuvwxyz";
+        let name = nameElement.value.toLowerCase();
+
+        for (let alphaIndex = 1; alphaIndex <= alpha.length; alphaIndex++){
+          alphabets[alpha[alphaIndex-1]] = String(alphaIndex);
+        }
+        let lettersPosition = [];
+        let sum = 0;
+        for (nameIndex = 0; nameIndex < name.length; nameIndex++){
+          lettersPosition.push(alphabets[name[nameIndex]])
+          sum += Number(alphabets[name[nameIndex]])
+        }
+
+        let displayText = "";
+
+        displayText += lettersPosition[0];
+
+        for (textIndex = 1; textIndex < lettersPosition.length; textIndex++){
+          displayText += " + " + lettersPosition[textIndex]
+        }
+
+        displayText += " = " + sum;
+
+        displaySumElement.innerText = displayText;
+      }
+    </script>
+  </body>
+</html>
